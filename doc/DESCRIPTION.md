@@ -1,1 +1,1 @@
-Trivabble is a network Scrabble® game.
+Trivabble is free a network Scrabble game. It is not in any way connected to Hasbro, who has the rights on the trademark Scrabble. Trivabble provides a board, a bag full of tiles, racks and a chat. People can play without registering and join each other by using the same game number.

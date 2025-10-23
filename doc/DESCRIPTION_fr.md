@@ -1,1 +1,1 @@
-Trivabble est un jeu de Scrabble® en réseau.
+Trivabble est un jeu de Scrabble en ligne gratuit. Il n'est en aucun cas lié à Hasbro, qui détient les droits sur la marque Scrabble. Trivabble fournit un plateau, un sac rempli de lettres, des supports et un chat. Les joueurs peuvent jouer sans s'inscrire et se rejoindre en utilisant le même numéro de partie.
