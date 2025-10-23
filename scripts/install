@@ -18,11 +18,11 @@ chown -R $username $install_dir
 
 # TWEAK trivabble client configuration
 
-ynh_script_progression "Create client configuration for this app path $path_url"
+ynh_script_progression "Create client configuration for this app path $path"
 
 cat <<EOF >$install_dir/public/config.js
 window.TrivabbleConf = {
-    APP_PATH: "$path_url"
+    APP_PATH: "$path"
 }
 EOF
 
