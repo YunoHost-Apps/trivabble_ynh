@@ -8,7 +8,6 @@
 source ../settings/scripts/_common.sh
 source /usr/share/yunohost/helpers
 
-
 #=================================================
 # RESTORE THE APP MAIN DIR
 #=================================================
