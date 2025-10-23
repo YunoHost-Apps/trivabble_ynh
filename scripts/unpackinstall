@@ -3,13 +3,7 @@
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
-ynh_script_progression "Setting up source files..." --time --weight=1
-
-### `ynh_setup_source` is used to install an app from a zip or tar.gz file,
-### downloaded from an upstream source, like a git repository.
-### `ynh_setup_source` use the file conf/app.src
-
-ynh_app_setting_set --app=$app --key=final_path --value=$final_path
+ynh_script_progression "Setting up source files..."
 
 # temporary intermediate directory since it contains more files than needed
 build_dest_dir=$(mktemp --directory --tmpdir="/tmp")
@@ -21,7 +15,7 @@ then
 
     # required to build i10n client support
     pushd "$build_dest_dir"
-    ynh_script_progression "Start building from $(pwd) " --time --weight=1
+    ynh_script_progression "Start building from $(pwd) "
     PORT=$port make
     popd
 else
@@ -36,13 +30,13 @@ if [[ ! -d $build_dest_dir/public/l10n/js ]] ; then
     ynh_die "expected public js directory for i10n not found in $(pwd)/$build_dest_dir"
 fi
 
-# deliver it to $final_path ( hack copy subpart of bin/upgrade-prod.sh )
+# deliver it to $install_dir ( hack copy subpart of bin/upgrade-prod.sh )
 
 echo "Sending to production..."
 
 WORKING_DIRECTORY=$build_dest_dir
-PROD_PUBLIC_DIR=$final_path/public
-PROD_SERVER_DIR=$final_path/server
+PROD_PUBLIC_DIR=$install_dir/public
+PROD_SERVER_DIR=$install_dir/server
 
 mkdir -p $PROD_PUBLIC_DIR
 mkdir -p $PROD_SERVER_DIR
@@ -52,6 +46,3 @@ rsync -avp --delete --exclude 'config.js' "$WORKING_DIRECTORY/public/" "$PROD_PU
 rsync -avp --delete --exclude 'config.js' "$WORKING_DIRECTORY/server/" "$PROD_SERVER_DIR/"
 
 rm -rf $build_dest_dir
-
-# Download, check integrity, uncompress and patch the source from app.src
-# ynh_setup_source --dest_dir="$final_path"
