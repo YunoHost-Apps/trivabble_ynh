@@ -43,5 +43,5 @@ setting_source_files() {
         rsync -avp --delete --exclude 'config.js' "$WORKING_DIRECTORY/public/" "$PROD_PUBLIC_DIR/"
         rsync -avp --delete --exclude 'config.js' "$WORKING_DIRECTORY/server/" "$PROD_SERVER_DIR/"
 
-        ynh_secure_remove $build_dest_dir
+        ynh_safe_rm $build_dest_dir
 }
