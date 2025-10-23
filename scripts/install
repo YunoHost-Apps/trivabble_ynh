@@ -14,24 +14,20 @@ ynh_script_progression "Setting up source files..."
 
 setting_source_files
 
-# Set right permissions for curl install
-chown -R $app $install_dir
-
-# TWEAK trivabble client configuration
-ynh_script_progression "Create client configuration for this app path $path"
-
-cat <<EOF >$install_dir/public/config.js
-window.TrivabbleConf = {
-    APP_PATH: "$path"
-}
-EOF
-
-# Set permissions to app files
-
 # /public is static and served by nginx, delivers html css and js
-chown -R www-data:$app $install_dir
+chown -R $app:www-data $install_dir
+
 # /server is nodejos websocket server responding for :trivabble/ websockets
 chown -R $app:$app $install_dir/server
+
+#=================================================
+# APP INITIAL CONFIGURATION
+#=================================================
+ynh_script_progression "Adding $app's configuration files..."
+
+ynh_config_add --template="config.js" --destination="$install_dir/public/config.js"
+
+chown -R www-data:$app $install_dir/public/config.js
 
 #=================================================
 # SYSTEM CONFIGURATION
