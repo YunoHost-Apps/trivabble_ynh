@@ -32,12 +32,15 @@ setting_source_files() {
 
         # deliver it to $install_dir ( hack copy subpart of bin/upgrade-prod.sh )
 
+        mkdir -p "$install_dir/public"
+        mkdir -p "$install_dir/server"
+
         WORKING_DIRECTORY=$build_dest_dir
         PROD_PUBLIC_DIR=$install_dir/public
         PROD_SERVER_DIR=$install_dir/server
 
-        mkdir -p $PROD_PUBLIC_DIR
-        mkdir -p $PROD_SERVER_DIR
+        #mkdir -p $PROD_PUBLIC_DIR
+        #mkdir -p $PROD_SERVER_DIR
 
         # this is where we needed rsync
         rsync -avp --delete --exclude 'config.js' "$WORKING_DIRECTORY/public/" "$PROD_PUBLIC_DIR/"
