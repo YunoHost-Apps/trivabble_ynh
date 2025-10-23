@@ -15,7 +15,7 @@ setting_source_files() {
 
             # required to build i10n client support
             pushd "$build_dest_dir"
-            ynh_script_progression "Start building from $(pwd) "
+
             PORT=$port make
             popd
         else
@@ -32,8 +32,6 @@ setting_source_files() {
 
         # deliver it to $install_dir ( hack copy subpart of bin/upgrade-prod.sh )
 
-        echo "Sending to production..."
-
         WORKING_DIRECTORY=$build_dest_dir
         PROD_PUBLIC_DIR=$install_dir/public
         PROD_SERVER_DIR=$install_dir/server
@@ -45,5 +43,5 @@ setting_source_files() {
         rsync -avp --delete --exclude 'config.js' "$WORKING_DIRECTORY/public/" "$PROD_PUBLIC_DIR/"
         rsync -avp --delete --exclude 'config.js' "$WORKING_DIRECTORY/server/" "$PROD_SERVER_DIR/"
 
-        rm -rf $build_dest_dir
+        ynh_secure_remove $build_dest_dir
 }
