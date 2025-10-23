@@ -27,7 +27,11 @@ window.TrivabbleConf = {
 EOF
 
 # Set permissions to app files
-chown -R $app:$app $install_dir
+
+# /public is static and served by nginx, delivers html css and js
+chown -R www-data:$app $install_dir
+# /server is nodejos websocket server responding for :trivabble/ websockets
+chown -R $app:$app $install_dir/server
 
 #=================================================
 # SYSTEM CONFIGURATION

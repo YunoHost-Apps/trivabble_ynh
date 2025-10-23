@@ -18,6 +18,10 @@ Scrabble® game free play not enforcing rules
 <a href="https://github.com/YunoHost-Apps/trivabble_ynh/issues"><img height="100px" src="https://github.com/YunoHost/yunohost-artwork/raw/refs/heads/main/badges/neopossum-badges/badge_report_an_issue.svg"/></a>
 </div>
 
+
+## Screenshots
+![Screenshot of Trivabble](./doc/screenshots/screenshot.png)
+
 ## 📦 Developer info
 
 [![Automatic tests level](https://apps.yunohost.org/badge/cilevel/trivabble)](https://ci-apps.yunohost.org/ci/apps/trivabble/)
