@@ -51,6 +51,8 @@ ram.runtime = "50M"
     sha256 = "47869c5c9c8c625e36bfde5ff51ab0c470f6354fe2472ebf9181a2c9d385405c"
 
     [resources.system_user]
+    
+    [resources.install_dir]
 
     [resources.permissions]
     main.url = "/"
