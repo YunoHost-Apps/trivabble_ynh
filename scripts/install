@@ -10,14 +10,14 @@ source /usr/share/yunohost/helpers
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
+ynh_script_progression "Setting up source files..."
 
-source unpackinstall
+setting_source_files
 
 # Set right permissions for curl install
-chown -R $username $install_dir
+chown -R $app $install_dir
 
 # TWEAK trivabble client configuration
-
 ynh_script_progression "Create client configuration for this app path $path"
 
 cat <<EOF >$install_dir/public/config.js
@@ -25,8 +25,6 @@ window.TrivabbleConf = {
     APP_PATH: "$path"
 }
 EOF
-
-chown -R root $install_dir
 
 # Set permissions to app files
 chown -R $app:$app $install_dir
