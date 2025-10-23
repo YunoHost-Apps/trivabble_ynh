@@ -9,10 +9,7 @@ description.fr = "Scrabble® en jeu libre, à l'utilisateur d'appliquer les règ
 
 version = "2021.08.05~ynh1"
 
-[maintainer]
-name = "Philippe Lhardy"
-email = "pl@artisanlogiciel.net"
-url = "https://www.artisanlogiciel.net"
+maintainers = ["Philippe Lhardy"]
 
 [upstream]
 license = "AGPL-3.0-or-later"
