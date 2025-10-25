@@ -23,6 +23,14 @@ ynh_script_progression "Updating NGINX web server configuration..."
 ynh_config_change_url_nginx
 
 #=================================================
+# SPECIFIC MODIFICATIONS
+#=================================================
+
+ynh_config_add --template="config.js" --destination="$install_dir/public/config.js"
+
+chown -R www-data:$app $install_dir/public/config.js
+
+#=================================================
 # START SYSTEMD SERVICE
 #=================================================
 ynh_script_progression "Starting $app's systemd service..."
