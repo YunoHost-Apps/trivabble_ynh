@@ -27,7 +27,7 @@ ynh_script_progression "Adding $app's configuration files..."
 
 ynh_config_add --template="config.js" --destination="$install_dir/public/config.js"
 
-chown -R www-data:$app $install_dir/public/config.js
+chown -R $app:www-data $install_dir/public/config.js
 
 #=================================================
 # SYSTEM CONFIGURATION

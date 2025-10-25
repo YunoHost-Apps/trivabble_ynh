@@ -28,7 +28,7 @@ ynh_config_change_url_nginx
 
 ynh_config_add --template="config.js" --destination="$install_dir/public/config.js"
 
-chown -R www-data:$app $install_dir/public/config.js
+chown -R $app:www-data $install_dir/public/config.js
 
 #=================================================
 # START SYSTEMD SERVICE
