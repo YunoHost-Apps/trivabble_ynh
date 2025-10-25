@@ -1,128 +1,46 @@
 #!/bin/bash
 
 #=================================================
-# GENERIC START
-#=================================================
 # IMPORT GENERIC HELPERS
 #=================================================
 
-#Keep this path for calling _common.sh inside the execution's context of backup and restore scripts
+# Keep this path for calling _common.sh inside the execution's context of backup and restore scripts
 source ../settings/scripts/_common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
-# MANAGE SCRIPT FAILURE
+# RESTORE THE APP MAIN DIR
 #=================================================
+ynh_script_progression "Restoring the app main directory..."
 
-ynh_clean_setup () {
-	#### Remove this function if there's nothing to clean before calling the remove script.
-	true
-}
-# Exit if an error occurs during the execution of the script
-ynh_abort_if_errors
+ynh_restore "$install_dir"
 
 #=================================================
-# LOAD SETTINGS
+# RESTORE SYSTEM CONFIGURATIONS
 #=================================================
-ynh_script_progression "Loading settings..." --time --weight=1
-
-domain=$(ynh_app_setting_get --app=$app --key=domain)
-path_url=$(ynh_app_setting_get --app=$app --key=path)
-final_path=$(ynh_app_setting_get --app=$app --key=final_path)
-
-restore_config_only=No
-if [[ -d $final_path ]]
-then
-    ynh_print_info "installation directory $final_path already exists ! restoring only config"
-    restore_config_only=Yes
-fi
-
-username=$app
-groupname=$app
-
-#=================================================
-# CHECK IF THE APP CAN BE RESTORED
-#=================================================
-ynh_script_progression "Validating restoration parameters..." --time --weight=1
-
-#=================================================
-# STANDARD RESTORATION STEPS
-#=================================================
-# RESTORE THE NGINX CONFIGURATION
-#=================================================
+ynh_script_progression "Restoring system configurations related to $app..."
 
 ynh_restore "/etc/nginx/conf.d/$domain.d/$app.conf"
 
-#=================================================
-# RESTORE THE APP MAIN DIR
-#=================================================
-ynh_script_progression "Restoring the app main directory..." --time --weight=1
-
-if [[ "$restore_config_only" == "Yes" ]]
-then
-    # was for config only
-    ynh_print_info "Restoring only configuration restore_config_only=$restore_config_only"
-    ynh_restore "$final_path/public/config.js"
-    ynh_restore "$final_path/server/games.backup.json"
-else
-    # restore full path
-    ynh_restore "$final_path"
-fi
-
-#=================================================
-# RECREATE THE DEDICATED USER
-#=================================================
-ynh_script_progression "Recreating the dedicated system user..." --time --weight=1
-
-# Create the dedicated user (if not existing)
-ynh_system_user_create --username=$username
-
-#=================================================
-# RESTORE USER RIGHTS
-#=================================================
-
-# Restore permissions on app files
-chown -R root $final_path
-# required x access to enter it as trivabble system user for node
-chmod 755 $final_path
-
-# Set permissions to app files
-chown -R www-data:www-data $final_path
-chown -R $username:$groupname $final_path/server
-
-#=================================================
-# RESTORE SYSTEMD
-#=================================================
-ynh_script_progression "Restoring the systemd configuration..." --time --weight=1
-
 ynh_restore "/etc/systemd/system/$app.service"
-systemctl enable $app.service
+systemctl enable "$app.service" --quiet
 
-#=================================================
-# INTEGRATE SERVICE IN YUNOHOST
-#=================================================
-
-yunohost service add $app --description "A short description of the app" --log "/var/log/$app/$app.log"
-
-#=================================================
-# START SYSTEMD SERVICE
-#=================================================
-ynh_script_progression "Starting a systemd service..." --time --weight=1
-
-ynh_systemctl --service=$app --action="start" --log_path="/var/log/$app/$app.log"
-
-#=================================================
-# RESTORE THE LOGROTATE CONFIGURATION
-#=================================================
+yunohost service add "$app" --description="Trivabble game web server service" --log="/var/log/$app/$app.log"
 
 ynh_restore "/etc/logrotate.d/$app"
 
 #=================================================
-# GENERIC FINALIZATION
+# RESTORE VARIOUS FILES
 #=================================================
-# RELOAD NGINX
+
+ynh_restore "/var/log/$app/"
+
 #=================================================
-ynh_script_progression "Reloading nginx web server and php-fpm..." --time --weight=1
+# RELOAD NGINX AND PHP-FPM OR THE APP SERVICE
+#=================================================
+ynh_script_progression "Reloading NGINX web server and $app's service..."
+
+ynh_systemctl --service="$app" --action="start"
 
 ynh_systemctl --service=nginx --action=reload
 
@@ -130,4 +48,4 @@ ynh_systemctl --service=nginx --action=reload
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression "Restoration completed for $app" --time --last
+ynh_script_progression "Restoration completed for $app"
