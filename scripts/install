@@ -15,7 +15,7 @@ ynh_script_progression "Setting up source files..."
 setting_source_files
 
 # /public is static and served by nginx, delivers html css and js
-chown -R $app:www-data $install_dir
+chown -R $app:www-data $install_dir/public
 
 # /server is nodejos websocket server responding for :trivabble/ websockets
 chown -R $app:$app $install_dir/server
