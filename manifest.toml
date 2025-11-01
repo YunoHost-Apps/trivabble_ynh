@@ -7,7 +7,7 @@ name = "Trivabble"
 description.en = "Scrabble® game free play not enforcing rules"
 description.fr = "Scrabble® en jeu libre, à l'utilisateur d'appliquer les règles"
 
-version = "2021.08.05~ynh1"
+version = "2025.10.31~ynh1"
 
 maintainers = ["Philippe Lhardy"]
 
@@ -44,8 +44,8 @@ ram.runtime = "50M"
 [resources]
 
     [resources.sources.main]
-    url = "https://git.jakse.fr/trivabble/trivabble/archive/prod-v20210805.tar.gz"
-    sha256 = "47869c5c9c8c625e36bfde5ff51ab0c470f6354fe2472ebf9181a2c9d385405c"
+    url = "https://git.jakse.fr/trivabble/trivabble/archive/prod-v20251031.tar.gz"
+    sha256 = "18c5feff41539f9f2f0c4a2736b4be28196db7ccb391207ba916ee83f5f4b93e"
 
     [resources.system_user]
     
