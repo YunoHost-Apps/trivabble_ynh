@@ -11,7 +11,7 @@ It shall NOT be edited by hand.
 Scrabble® game free play not enforcing rules
 
 [![🌐 Official app website](https://img.shields.io/badge/Official_app_website-darkgreen?style=for-the-badge)](https://trivabble.org/)
-[![Version: 2021.08.05~ynh1](https://img.shields.io/badge/Version-2021.08.05~ynh1-rgb(18,138,11)?style=for-the-badge)](https://ci-apps.yunohost.org/ci/apps/trivabble/)
+[![Version: 2025.10.31~ynh1](https://img.shields.io/badge/Version-2025.10.31~ynh1-rgb(18,138,11)?style=for-the-badge)](https://ci-apps.yunohost.org/ci/apps/trivabble/)
 
 <div align="center">
 <a href="https://apps.yunohost.org/app/trivabble"><img height="100px" src="https://github.com/YunoHost/yunohost-artwork/raw/refs/heads/main/badges/neopossum-badges/badge_more_info_on_the_appstore.svg"/></a>
