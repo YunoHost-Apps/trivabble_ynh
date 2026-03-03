@@ -7,7 +7,7 @@ name = "Trivabble"
 description.en = "Scrabble® game free play not enforcing rules"
 description.fr = "Scrabble® en jeu libre, à l'utilisateur d'appliquer les règles"
 
-version = "2025.10.31~ynh1"
+version = "2025.12.06~ynh1"
 
 maintainers = ["Philippe Lhardy"]
 
@@ -18,7 +18,7 @@ code = "https://git.jakse.fr/trivabble/trivabble"
 
 [integration]
 architectures = "all"
-yunohost = ">= 12.1.17"
+yunohost = ">= 12.1.38"
 helpers_version = "2.1"
 multi_instance = false
 
@@ -44,8 +44,8 @@ ram.runtime = "50M"
 [resources]
 
     [resources.sources.main]
-    url = "https://git.jakse.fr/trivabble/trivabble/archive/prod-v20251031.tar.gz"
-    sha256 = "18c5feff41539f9f2f0c4a2736b4be28196db7ccb391207ba916ee83f5f4b93e"
+    url = "https://git.jakse.fr/trivabble/trivabble/archive/prod-v20251206.tar.gz"
+    sha256 = "ec0814f085432d7abc78010fb8945ec6326bd40ec8beaad15d1d14bb5b03cdeb"
 
     [resources.system_user]
     
